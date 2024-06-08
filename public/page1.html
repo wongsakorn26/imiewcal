@@ -1,120 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style/page1.css" />
+    <title>Imiew_mobile89</title>
+    <link rel="icon" type="image/x-icon" href="pic/imiew.jpg" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <script>
-        function cal() {
-            var price = parseFloat(document.getElementById("price1").value); // Convert input value to a floating-point number
-            var field = document.getElementById("field");
-            // Calculate total price including 40% markup and 100 additional units
-            var percent = 47;
-            var num = 100;
-            var total_percent = (price * percent) / 100;
-            var total_sum1 = price + total_percent + num;
-
-
-            //ปัดขึ้น 
-            sum = Math.ceil(total_sum1)
-            //วางดาวน์ 
-            // Display the results"ผ่อนไปใช้ไป ราคา + 40% + 100 : "
-            var newtext = "ราคาผ่อนไปใช้ไป " + "<b>" + sum + "</b>" + "<br>"
-            field.innerHTML = newtext;
+      function cal() {
+        var price = parseFloat(document.getElementById("price1").value)
+        var field = document.getElementById("field")
+        if (price >= 1000 && price <= 9999) {
+          var percent = 51
+          calSum()
+        } else if (price >= 10000 && price <= 60000) {
+          var percent = 41
+          calSum()
+        } else {
+          var text = "ราคาเกิน 60,000 หรือต่ำกว่า 1,000"
+          calSum(text)
         }
-
-
+        function calSum() {
+          var num = 450 //ค่าส่ง
+          var total_percent = (price * percent) / 100
+          var total_sum1 = price + total_percent + num
+          sum = Math.ceil(total_sum1)
+        }
+        if (text) {
+          var newtext = text
+          field.innerHTML = newtext
+        } else {
+          var newtext = "ราคาผ่อนไปใช้ไป " + "<b>" + sum + "</b>" + "<br>"
+          field.innerHTML = newtext
+        }
+      }
     </script>
-    <style>
-        /* General styles */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        fieldset {
-            margin: 20px;
-            padding: 20px;
-            border: 2px solid #ccc;
-            border-radius: 10px;
-        }
-
-        legend {
-            font-weight: bold;
-        }
-
-        input[type="number"] {
-            width: 100%;
-            padding: 5px;
-            margin-bottom: 10px;
-        }
-
-        input[type="button"] {
-            width: 100%;
-            padding: 10px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        a {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            text-decoration: none;
-            /* Remove underline from link */
-        }
-
-        button {
-            width: 100%;
-            /* Make the button width 100% */
-            padding: 10px;
-            background-color: rgba(230, 25, 25, 0.938);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #field {
-            margin-top: 10px;
-        }
-
-        /* Media query for mobile devices */
-        @media screen and (max-width: 600px) {
-            fieldset {
-                margin: 10px;
-                padding: 10px;
-            }
-
-            input[type="number"] {
-                width: calc(100% - 20px);
-                /* Subtract the padding width from the parent container */
-                padding: 5px;
-                margin-bottom: 10px;
-            }
-        }
-    </style>
-</head>
-
-<body>
+  </head>
+  <body>
     <fieldset>
-        <legend><b>ผ่อนไปใช้ไป</b></legend>
-        <form>
-            ราคา + 47% + 100<input type="number" id="price1" > <br>
-            <input type="button" value="คำนวณ" onclick="cal()">
-        </form>
-        <div id="field">
-
-        </div>
+      <legend><b>ผ่อนไปใช้ไป</b></legend>
+      <form>
+        ราคา<input type="number" id="price1" /> <br />
+        <input type="button" value="คำนวณ" onclick="cal()" />
+      </form>
+      <div id="field"></div>
+      <a href="index.html"><button>ย้อนกลับ</button></a>
     </fieldset>
-
-
-    <a href="index.html"><button>ย้อนกลับ</button></a>
-</body>
-
+  </body>
 </html>

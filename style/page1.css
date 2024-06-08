@@ -1,0 +1,70 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+fieldset {
+  margin: 20px;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
+
+legend {
+  font-weight: bold;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+input[type="button"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+a {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  text-decoration: none;
+  /* Remove underline from link */
+}
+
+button {
+  width: 100%;
+  /* Make the button width 100% */
+  padding: 10px;
+  background-color: rgba(230, 25, 25, 0.938);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#field {
+  margin-top: 10px;
+}
+
+/* Media query for mobile devices */
+@media screen and (max-width: 600px) {
+  fieldset {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  input[type="number"] {
+    width: calc(100% - 20px);
+    /* Subtract the padding width from the parent container */
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+}

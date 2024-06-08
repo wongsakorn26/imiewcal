@@ -1,47 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-    <style>
-        /* CSS for desktop */
-        div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+  <style>
+    /* CSS for desktop */
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      /* background: linear-gradient(135deg, #f06, #4a90e2); */
+      font-family: Arial, sans-serif;
+      background-image: url("pic/imiew.jpg"); /* Corrected the background image path */
+      background-size: cover; /* Make sure the background covers the entire page */
+      background-position: center; /* Center the background image */
+      color: #ffffff;
+    }
 
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #3498db;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 0 10px;
-        }
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
 
-        /* CSS for mobile */
-        @media screen and (max-width: 600px) {
-            div {
-                flex-direction: column;
-            }
+    a {
+      text-decoration: none;
+    }
 
-            button {
-                margin: 10px 0;
-            }
-        }
-    </style>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      background-color: #3498db;
+      color: #ffffff;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      margin: 0 15px;
+      transition: background-color 0.3s, color 0.3s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+      background-color: red;
+      color: #ffffff;
+    }
+
+    /* CSS for mobile */
+    @media screen and (max-width: 600px) {
+      body {
+        padding: 20px;
+      }
+
+      div {
+        flex-direction: column;
+      }
+
+      button {
+        margin: 10px 0;
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Imiew_mobile89</title>
+    <link rel="icon" type="image/x-icon" href="pic/imiew.jpg" />
+  </head>
+  <body>
     <div>
-        <a href="page1.html"><button>ผ่อนไปใช้ไป</button></a>
-        <a href="page2.html"><button>ผ่อนหมดรับของ</button></a>
-        <a href="page3.html"><button>วางดาวน์</button></a>
+      <a href="page1.html"><button>ผ่อนไปใช้ไป 2</button></a>
+      <a href="page2.html"><button>ผ่อนหมดรับของ 2</button></a>
+      <a href="page3.html"><button>วางดาวน์ 2</button></a>
     </div>
-</body>
-
+  </body>
 </html>
