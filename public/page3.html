@@ -26,6 +26,19 @@
           .querySelectorAll('input[name="downPercent"]')
           .forEach((radio) => (radio.checked = false))
         document.getElementById("downChoice").disabled = false
+        document.getElementById("downChoice").value = ""
+      }
+
+      function uncheckWeekly() {
+        document
+          .querySelectorAll('input[name="installmentPeriodweek"]')
+          .forEach((radio) => (radio.checked = false))
+      }
+
+      function uncheckMonthly() {
+        document
+          .querySelectorAll('input[name="installmentPeriodmonth"]')
+          .forEach((radio) => (radio.checked = false))
       }
 
       function cal() {
@@ -35,7 +48,12 @@
         )
         let downPaymentPercent
         let installmentPeriod
-        let installmentPeriods
+        let installmentRate
+
+        if (!price || price <= 0) {
+          alert("Please enter a valid price.")
+          return
+        }
 
         if (!isNaN(downChoice) && downChoice > 0) {
           if (downChoice >= price) {
@@ -53,26 +71,16 @@
           }[document.querySelector('input[name="downPercent"]:checked')?.id]
 
           if (!downPaymentPercent) {
-            alert("ข้อมูลไม่ครบ")
+            alert("กรุณาเลือกเปอร์เซ็นต์วางดาวน์หรือใส่ราคาวางดาวน์")
             return
           }
         }
 
         installmentPeriod = document.querySelector(
-          'input[name="installmentPeriod"]:checked'
+          'input[name="installmentPeriodweek"]:checked'
         )?.value
-        installmentPeriods = installmentPeriod
 
-        if (!installmentPeriod) {
-          alert("Please select an installment period.")
-          return
-        }
-
-        const downPayment = price * downPaymentPercent
-        const sum = Math.ceil(downPayment)
-        const cal_cap = price - sum
-        const sum2 = 950
-        const installmentRates = {
+        installmentRate = {
           4: 0.23,
           8: 0.33,
           12: 0.43,
@@ -85,35 +93,48 @@
           40: 1.13,
           44: 1.23,
           46: 1.23,
-          1: 0.23,
-          2: 0.33,
-          3: 0.43,
-          4: 0.53,
-          5: 0.63,
-          6: 0.73,
-          7: 0.83,
-          8: 0.93,
-          9: 1.03,
-          10: 1.13,
-          11: 1.23,
-          12: 1.23,
+        }[installmentPeriod]
+
+        if (!installmentPeriod) {
+          installmentPeriod = document.querySelector(
+            'input[name="installmentPeriodmonth"]:checked'
+          )?.value
+
+          installmentRate = {
+            1: 0.23,
+            2: 0.33,
+            3: 0.43,
+            4: 0.53,
+            5: 0.63,
+            6: 0.73,
+            7: 0.83,
+            8: 0.93,
+            9: 1.03,
+            10: 1.13,
+            11: 1.23,
+            12: 1.23,
+          }[installmentPeriod]
         }
 
-        if (installmentPeriod) {
-          const rate = installmentRates[installmentPeriod]
-          const pricePerInstallment = Math.ceil(
-            (cal_cap + cal_cap * rate + sum2) / installmentPeriod
-          )
-
-          const field = document.getElementById("field")
-          field.innerHTML = `
-            ราคาวางดาวน์: ${sum}<br>
-            ราคาหักวางดาวน์: ${cal_cap}<br>
-            งวด: ${installmentPeriod} งวด ราคาต่องวด: ${pricePerInstallment}
-          `
-        } else {
-          alert("Invalid installment period.")
+        if (!installmentPeriod || !installmentRate) {
+          alert("กรุณาเลือกงวดการผ่อนชำระ")
+          return
         }
+
+        const downPayment = price * downPaymentPercent
+        const sum = Math.ceil(downPayment)
+        const cal_cap = price - sum
+        const sum2 = 950
+        const pricePerInstallment = Math.ceil(
+          (cal_cap + cal_cap * installmentRate + sum2) / installmentPeriod
+        )
+
+        const field = document.getElementById("field")
+        field.innerHTML = `
+          ราคาวางดาวน์: ${sum}<br>
+          ราคาหักวางดาวน์: ${cal_cap}<br>
+          งวด: ${installmentPeriod} งวด ราคาต่องวด: ${pricePerInstallment}
+        `
       }
     </script>
   </head>
@@ -171,56 +192,200 @@
       <h2>เลือกงวดการผ่อนชำระ</h2>
       <h3>รายสัปดาห์</h3>
       <div class="radio-group">
-        <input type="radio" id="do4" name="installmentPeriod" value="4" />
+        <input
+          type="radio"
+          id="do4"
+          name="installmentPeriodweek"
+          value="4"
+          onchange="uncheckMonthly()"
+        />
         <label for="do4">4 งวด</label>
-        <input type="radio" id="do8" name="installmentPeriod" value="8" />
+        <input
+          type="radio"
+          id="do8"
+          name="installmentPeriodweek"
+          value="8"
+          onchange="uncheckMonthly()"
+        />
         <label for="do8">8 งวด</label>
-        <input type="radio" id="do12" name="installmentPeriod" value="12" />
+        <input
+          type="radio"
+          id="do12"
+          name="installmentPeriodweek"
+          value="12"
+          onchange="uncheckMonthly()"
+        />
         <label for="do12">12 งวด</label>
-        <input type="radio" id="do16" name="installmentPeriod" value="16" />
+        <input
+          type="radio"
+          id="do16"
+          name="installmentPeriodweek"
+          value="16"
+          onchange="uncheckMonthly()"
+        />
         <label for="do16">16 งวด</label>
-        <input type="radio" id="do20" name="installmentPeriod" value="20" />
+        <input
+          type="radio"
+          id="do20"
+          name="installmentPeriodweek"
+          value="20"
+          onchange="uncheckMonthly()"
+        />
         <label for="do20">20 งวด</label>
-        <input type="radio" id="do24" name="installmentPeriod" value="24" />
+        <input
+          type="radio"
+          id="do24"
+          name="installmentPeriodweek"
+          value="24"
+          onchange="uncheckMonthly()"
+        />
         <label for="do24">24 งวด</label>
-        <input type="radio" id="do28" name="installmentPeriod" value="28" />
+        <input
+          type="radio"
+          id="do28"
+          name="installmentPeriodweek"
+          value="28"
+          onchange="uncheckMonthly()"
+        />
         <label for="do28">28 งวด</label>
-        <input type="radio" id="do32" name="installmentPeriod" value="32" />
+        <input
+          type="radio"
+          id="do32"
+          name="installmentPeriodweek"
+          value="32"
+          onchange="uncheckMonthly()"
+        />
         <label for="do32">32 งวด</label>
-        <input type="radio" id="do36" name="installmentPeriod" value="36" />
+        <input
+          type="radio"
+          id="do36"
+          name="installmentPeriodweek"
+          value="36"
+          onchange="uncheckMonthly()"
+        />
         <label for="do36">36 งวด</label>
-        <input type="radio" id="do40" name="installmentPeriod" value="40" />
+        <input
+          type="radio"
+          id="do40"
+          name="installmentPeriodweek"
+          value="40"
+          onchange="uncheckMonthly()"
+        />
         <label for="do40">40 งวด</label>
-        <input type="radio" id="do44" name="installmentPeriod" value="44" />
+        <input
+          type="radio"
+          id="do44"
+          name="installmentPeriodweek"
+          value="44"
+          onchange="uncheckMonthly()"
+        />
         <label for="do44">44 งวด</label>
-        <input type="radio" id="do46" name="installmentPeriod" value="46" />
+        <input
+          type="radio"
+          id="do46"
+          name="installmentPeriodweek"
+          value="46"
+          onchange="uncheckMonthly()"
+        />
         <label for="do46">46 งวด</label>
       </div>
       <h3>รายเดือน</h3>
       <div class="radio-group">
-        <input type="radio" id="mo1" name="installmentPeriod" value="1" />
+        <input
+          type="radio"
+          id="mo1"
+          name="installmentPeriodmonth"
+          value="1"
+          onchange="uncheckWeekly()"
+        />
         <label for="mo1">1 งวด</label>
-        <input type="radio" id="mo2" name="installmentPeriod" value="2" />
+        <input
+          type="radio"
+          id="mo2"
+          name="installmentPeriodmonth"
+          value="2"
+          onchange="uncheckWeekly()"
+        />
         <label for="mo2">2 งวด</label>
-        <input type="radio" id="mo3" name="installmentPeriod" value="3" />
+        <input
+          type="radio"
+          id="mo3"
+          name="installmentPeriodmonth"
+          value="3"
+          onchange="uncheckWeekly()"
+        />
         <label for="mo3">3 งวด</label>
-        <input type="radio" id="mo4" name="installmentPeriod" value="4" />
+        <input
+          type="radio"
+          id="mo4"
+          name="installmentPeriodmonth"
+          value="4"
+          onchange="uncheckWeekly()"
+        />
         <label for="mo4">4 งวด</label>
-        <input type="radio" id="mo5" name="installmentPeriod" value="5" />
+        <input
+          type="radio"
+          id="mo5"
+          name="installmentPeriodmonth"
+          value="5"
+          onchange="uncheckWeekly()"
+        />
         <label for="mo5">5 งวด</label>
-        <input type="radio" id="mo6" name="installmentPeriod" value="6" />
+        <input
+          type="radio"
+          id="mo6"
+          name="installmentPeriodmonth"
+          value="6"
+          onchange="uncheckWeekly()"
+        />
         <label for="mo6">6 งวด</label>
-        <input type="radio" id="mo7" name="installmentPeriod" value="7" />
+        <input
+          type="radio"
+          id="mo7"
+          name="installmentPeriodmonth"
+          value="7"
+          onchange="uncheckWeekly()"
+        />
         <label for="mo7">7 งวด</label>
-        <input type="radio" id="mo8" name="installmentPeriod" value="8" />
+        <input
+          type="radio"
+          id="mo8"
+          name="installmentPeriodmonth"
+          value="8"
+          onchange="uncheckWeekly()"
+        />
         <label for="mo8">8 งวด</label>
-        <input type="radio" id="mo9" name="installmentPeriod" value="9" />
+        <input
+          type="radio"
+          id="mo9"
+          name="installmentPeriodmonth"
+          value="9"
+          onchange="uncheckWeekly()"
+        />
         <label for="mo9">9 งวด</label>
-        <input type="radio" id="mo10" name="installmentPeriod" value="10" />
+        <input
+          type="radio"
+          id="mo10"
+          name="installmentPeriodmonth"
+          value="10"
+          onchange="uncheckWeekly()"
+        />
         <label for="mo10">10 งวด</label>
-        <input type="radio" id="mo11" name="installmentPeriod" value="11" />
+        <input
+          type="radio"
+          id="mo11"
+          name="installmentPeriodmonth"
+          value="11"
+          onchange="uncheckWeekly()"
+        />
         <label for="mo11">11 งวด</label>
-        <input type="radio" id="mo12" name="installmentPeriod" value="12" />
+        <input
+          type="radio"
+          id="mo12"
+          name="installmentPeriodmonth"
+          value="12"
+          onchange="uncheckWeekly()"
+        />
         <label for="mo12">12 งวด</label>
       </div>
       <button onclick="cal()">คำนวณ</button>
