@@ -12,19 +12,24 @@
         var price = parseFloat(document.getElementById("price1").value)
         var field = document.getElementById("field")
         if (price >= 1000 && price <= 9999) {
+          var freeGift = 0
           var percent = 35
           calSum()
         } else if (price >= 10000 && price <= 60000) {
           var percent = 35
+            var freeGift = 0
+          if (price >= 20000 && price <= 60000) {
+            var freeGift = 2500
+          }
           calSum()
         } else {
           var text = "ราคาเกิน 60,000 หรือต่ำกว่า 1,000"
           calSum(text)
         }
         function calSum() {
-          var num = 450 //ค่าส่ง
+          var num = 950 //ค่าส่ง
           var total_percent = (price * percent) / 100
-          var total_sum1 = price + total_percent + num
+          var total_sum1 = price + total_percent + num + freeGift
           sum = Math.ceil(total_sum1)
         }
         if (text) {

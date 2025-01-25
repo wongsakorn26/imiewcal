@@ -81,18 +81,18 @@
         )?.value
 
         installmentRate = {
-          4: 0.23,
-          8: 0.33,
-          12: 0.43,
-          16: 0.53,
-          20: 0.63,
-          24: 0.73,
-          28: 0.83,
-          32: 0.93,
-          36: 1.03,
-          40: 1.13,
-          44: 1.23,
-          46: 1.23,
+          4: 0.10,
+          8: 0.20,
+          12: 0.30,
+          16: 0.40,
+          20: 0.50,
+          24: 0.60,
+          28: 0.70,
+          32: 0.80,
+          36: 0.90,
+          40: 1.00,
+          44: 1.10,
+          46: 1.20,
         }[installmentPeriod]
 
         if (!installmentPeriod) {
@@ -101,18 +101,18 @@
           )?.value
 
           installmentRate = {
-            1: 0.23,
-            2: 0.33,
-            3: 0.43,
-            4: 0.53,
-            5: 0.63,
-            6: 0.73,
-            7: 0.83,
-            8: 0.93,
-            9: 1.03,
-            10: 1.13,
-            11: 1.23,
-            12: 1.23,
+            1: 0.10,
+            2: 0.20,
+            3: 0.30,
+            4: 0.40,
+            5: 0.50,
+            6: 0.60,
+            7: 0.70,
+            8: 0.80,
+            9: 0.90,
+            10: 1.00,
+            11: 1.10,
+            12: 1.20,
           }[installmentPeriod]
         }
 
@@ -123,8 +123,10 @@
 
         const downPayment = price * downPaymentPercent
         const sum = Math.ceil(downPayment)
+        console.log(sum)
         const cal_cap = price - sum
-        const sum2 = 950
+        const sum2 = 1025
+        console.log("(",cal_cap ,"+", cal_cap ,"*", installmentRate ,"+", sum2,")" ,"/", installmentPeriod)
         const pricePerInstallment = Math.ceil(
           (cal_cap + cal_cap * installmentRate + sum2) / installmentPeriod
         )
